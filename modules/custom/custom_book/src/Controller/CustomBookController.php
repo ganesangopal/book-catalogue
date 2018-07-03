@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
  * Controller routines for custom book routes.
@@ -29,10 +30,12 @@ class CustomBookController extends ControllerBase {
   	  if ($user_exists === FALSE) {
         $node->field_inspired_by[] = ['target_id' => $uid];
         $node->save();
-        drupal_set_message(t('Book is added to my favourite lists successfully.'), 'status', TRUE);
+        $link = Link::fromTextAndUrl($this->t('My favourite catalogues'), Url::fromUri('internal:/user/' . $uid . '/my-favourite-catalogues'))->toString();
+        drupal_set_message($this->t('Book is added to @link successfully.', ['@link' => $link]), 'status', TRUE);
       }
       else {
-      	drupal_set_message(t('Book is already available in my favourite lists.'), 'status', TRUE);
+      	$link = Link::fromTextAndUrl($this->t('My favourite lists'), Url::fromUri('internal:/user/' . $uid . '/my-favourite-catalogues'))->toString();
+      	drupal_set_message($this->t('Book is already available in @link.', ['@link' => $link]), 'status', TRUE);
       }
   	}
     $url = Url::fromUri('internal:/home');
