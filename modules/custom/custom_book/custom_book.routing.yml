@@ -1,0 +1,6 @@
+custom_book.add_book_list:
+  path: '/add-book-list/{nid}'
+  defaults:
+    _controller: '\Drupal\custom_book\Controller\CustomBookController::addBookList'
+  requirements:
+    _user_is_logged_in: 'TRUE'

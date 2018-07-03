@@ -1,0 +1,5 @@
+name : 'Custom Book Catalogue'
+description : 'Provides custom features for book catalogue.'
+type: module
+core: '8.x'
+project: 'custom'
